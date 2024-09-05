@@ -68,7 +68,7 @@ public class Calculator {
                 System.out.println("0으로 나눌 수 없습니다.");
             }
             catch(InputMismatchException e){
-                System.out.println("올바른 형태의 양의 정수를 입력해주세요.");
+                System.out.println("양의 정수가 아닌 이상한 값이 들어옴");
                 scanner.nextLine(); // 버퍼 비움 (안 그러면 무한 루프 발생)
             }
         }
