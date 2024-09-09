@@ -1,12 +1,17 @@
 package calculatorLv2;
 
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 
-        Calculator calculator;
+        Calculator calculator = new Calculator();
+        LinkedList<Double> dictionary = new LinkedList<>();
+        Calculator.setDictionary(dictionary); // setter 이용
+
+
         Scanner scanner = new Scanner(System.in);
         double result = 0.0;
 
@@ -36,7 +41,7 @@ public class App {
                         result = calculator.calculate(firstNumber, secondNumber);
                         break;
                     case '-':
-                        calculator = new Calculator(new SubstractCalculator());
+                        calculator = new Calculator(new SubtractCalculator());
                         result = calculator.calculate(firstNumber, secondNumber);
                         break;
                     case '*':
@@ -52,11 +57,10 @@ public class App {
                 }
 
                 System.out.println("결과: " + result);
-
-
                 System.out.println("===============================");
                 System.out.println("이전 기록 : ");
-                calculator.getResult();
+                System.out.println(calculator.getDictionary()); // calculator 의 dictionary 에 접근하여 정보 출력
+
 
 
 
@@ -66,7 +70,7 @@ public class App {
                     System.out.println("view : 저장데이터 보기 //delete : 첫 번째 값 삭제 // change : 값 변경하기 // 아무 키 : 계산기로 // exit : 종료  ");
                     String command = scanner.nextLine();
                     if (command.equalsIgnoreCase("view")) {
-                        calculator.getResult();
+                        calculator.printResult();
                     }
                     else if(command.equalsIgnoreCase("delete")){
                         calculator.deleteResult();
@@ -80,16 +84,12 @@ public class App {
                         System.out.println("계산기를 종료합니다.");
                         System.exit(0);
                     }
+
                     else{
                         break;
                     }
 
                 }while(true);
-
-                
-
-
-
 
 
             } catch (InputMismatchException e) {
