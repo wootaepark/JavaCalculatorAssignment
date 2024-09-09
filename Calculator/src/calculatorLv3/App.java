@@ -1,12 +1,16 @@
 package calculatorLv3;
 
 import java.util.InputMismatchException;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
 
-        ArithmeticalCalculator<Number> arithmeticalCalculator;
+        ArithmeticalCalculator<Number> arithmeticalCalculator = new ArithmeticalCalculator<>();
+        LinkedList<Double> dictionary = new LinkedList<>();
+        ArithmeticalCalculator.setDictionary(dictionary); // setter 이용
+
         Scanner scanner = new Scanner(System.in);
         double result = 0.0;
 
@@ -14,9 +18,11 @@ public class App {
         while (true) {
             try {
                 // 입력 부분
+
                 System.out.println("===============================");
                 System.out.print("첫 번째 숫자를 입력하세요:");
                 Number firstNumber= readNumber(scanner);
+                scanner.nextLine();
                 System.out.print("두 번째 숫자를 입력하세요:");
                 Number secondNumber= readNumber(scanner);
                 if (firstNumber.doubleValue() < 0 || secondNumber.doubleValue() < 0) {
@@ -26,10 +32,10 @@ public class App {
 
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 String operatorInput = scanner.next();
-                OperatorType operator = getOperatorType(operatorInput);
+                OperatorType operator = getOperatorType(operatorInput); // Enum 을 이용한 operator 인스턴스 초기화
 
                 scanner.nextLine(); // 버퍼 비움
-
+                
                 // 연산 부분
                 switch (operator) { // enhanced switch 문을 써도 된다.
                     case ADD:
@@ -65,7 +71,7 @@ public class App {
                     System.out.println("view : 저장데이터 보기 //delete : 첫 번째 값 삭제 // change : 값 변경하기 // 아무 키 : 계산기로 // exit : 종료  ");
                     String command = scanner.nextLine();
                     if (command.equalsIgnoreCase("view")) {
-                        arithmeticalCalculator.getResult();
+                        arithmeticalCalculator.printResult();
                     } else if (command.equalsIgnoreCase("delete")) {
                         arithmeticalCalculator.deleteResult();
                     } else if (command.equalsIgnoreCase("change")) {

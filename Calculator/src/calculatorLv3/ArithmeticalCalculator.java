@@ -3,29 +3,49 @@ package calculatorLv3;
 import java.util.LinkedList;
 
 public class ArithmeticalCalculator<T extends Number> {
-    private static final LinkedList<Double> dictionary = new LinkedList<>(); // 참조 변경 불가
+    private static LinkedList<Double> dictionary; // 참조 변경 불가
     // <연산 순번, 결과 값>, 저장
 
     private AbstractCalculator<T> calculator; // 생성과 함께 원하는 계산기 타입 설정 가능
 
 
+
+    public ArithmeticalCalculator() {
+        this.calculator = null; // 일단 null 로 지정
+    }
     public ArithmeticalCalculator(AbstractCalculator<T> abstractCalculator) {
-        this.calculator = abstractCalculator;
+        this.calculator = abstractCalculator; // 지정된 연산 타입의 ArithmeticalCalculator 생성
 
     }
-
 
     public void setOperation(AbstractCalculator<T> abstractCalculator) {
         this.calculator = abstractCalculator;
     }
+
+    public LinkedList<Double> getDictionary() {
+        return dictionary;
+    }
+
+    public static void setDictionary(LinkedList<Double> dictionary) {
+        ArithmeticalCalculator.dictionary = dictionary; // setter
+    }
+
 
     public void deleteResult() {
         if (dictionary.isEmpty()) {
             System.out.println("삭제할 요소가 없습니다.");
         } else {
             System.out.println("첫 번째 요소인 " + dictionary.poll() + "을 삭제합니다.");
-            getResult();
+            printResult();
         }
+
+    }
+
+    public void printResult() { //getter
+        for (int i = 0; i < dictionary.size(); i++) {
+            System.out.println(i + "번째 인덱스 : " + dictionary.get(i));
+        }
+
 
     }
 
@@ -35,15 +55,7 @@ public class ArithmeticalCalculator<T extends Number> {
             System.out.println("허용되지 않는 인덱스 입니다.");
         } else {
             dictionary.set(index, value);
-            getResult();
-        }
-
-
-    }
-
-    public void getResult() { //getter
-        for (int i = 0; i < dictionary.size(); i++) {
-            System.out.println(i + "번째 인덱스 : " + dictionary.get(i));
+            printResult();
         }
 
 
