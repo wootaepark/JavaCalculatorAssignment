@@ -43,6 +43,7 @@ public class Calculator {
                     case "/":
                         if(secondNumber == 0){
                             throw new ArithmeticException();
+                            // 0으로 나뉘는 경우 예외 발생
                         }
                         result = (double) firstNumber / secondNumber;
                         break;
