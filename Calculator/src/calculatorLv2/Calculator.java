@@ -33,9 +33,6 @@ public class Calculator {
 
 
 
-
-
-
     public void printResult() {
         for(int i=0;i<dictionary.size();i++){
             System.out.println(i + "번째 인덱스 : " + dictionary.get(i));
